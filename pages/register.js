@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 
 const Register = () => {
     const [state, setState] = useState({
-        name: "",
+        username: "",
         email: "",
         password: "",
         error: "",
@@ -12,7 +12,7 @@ const Register = () => {
     });
 
     // Destructure state
-    const { name, email, password, error, success, buttonText } = state;
+    const { username, email, password, error, success, buttonText } = state;
 
     const handleChange = (name) => (e) => {
         // Get field that is being updated.
@@ -26,15 +26,16 @@ const Register = () => {
     };
 
     const handleSubmit = (e) => {
-        //
+        e.preventDefault()
+        console.table({username, email, password});
     };
 
     const registerForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <input
-                    value={name}
-                    onChange={handleChange("name")}
+                    value={username}
+                    onChange={handleChange("username")}
                     type="text"
                     className="form-control"
                     placeholder="Type your name"
@@ -75,8 +76,6 @@ const Register = () => {
                 <h1>Register</h1>
                 <br />
                 {registerForm()}
-                <hr />
-                {JSON.stringify(state)}
             </div>
         </Layout>
     );
