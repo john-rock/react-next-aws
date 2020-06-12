@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Router from "next/router";
 import NProgress from "nprogress";
-import 'nprogress/nprogress.css';
+import "nprogress/nprogress.css";
 
 // Page load progress bar
 Router.onRouteChangeStart = (url) => NProgress.start();
@@ -10,7 +10,7 @@ Router.onRouteChangeComplete = (url) => NProgress.done();
 Router.onRouteChangeError = (url) => NProgress.done();
 
 const Layout = ({ children }) => {
-    const head = () => (
+    const Head = () => (
         <>
             <link
                 rel="stylesheet"
@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
 
     return (
         <>
-            {head()} {nav()}{" "}
+            {Head()} {nav()}{" "}
             <div className="container pt-5 pb-5">{children}</div>
         </>
     );
