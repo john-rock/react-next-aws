@@ -1,14 +1,15 @@
-import { useState } from "react";
-import Layout from "../components/Layout";
+import { useState } from 'react';
+import Layout from '../components/Layout';
+import axios from 'axios';
 
 const Register = () => {
     const [state, setState] = useState({
-        username: "",
-        email: "",
-        password: "",
-        error: "",
-        success: "",
-        buttonText: "Register",
+        username: '',
+        email: '',
+        password: '',
+        error: '',
+        success: '',
+        buttonText: 'Register',
     });
 
     // Destructure state
@@ -19,15 +20,22 @@ const Register = () => {
         setState({
             ...state,
             [name]: e.target.value,
-            error: "",
-            success: "",
-            buttonText: "Register",
+            error: '',
+            success: '',
+            buttonText: 'Register',
         });
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        console.table({username, email, password});
+        e.preventDefault();
+        // console.table({ username, email, password });
+        axios.post(`http://localhost:8000/api/register`, {
+            username: username,
+            email,
+            password
+        })
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
     };
 
     const registerForm = () => (
@@ -35,7 +43,7 @@ const Register = () => {
             <div className="form-group">
                 <input
                     value={username}
-                    onChange={handleChange("username")}
+                    onChange={handleChange('username')}
                     type="text"
                     className="form-control"
                     placeholder="Type your name"
@@ -45,7 +53,7 @@ const Register = () => {
             <div className="form-group">
                 <input
                     value={email}
-                    onChange={handleChange("email")}
+                    onChange={handleChange('email')}
                     type="email"
                     className="form-control"
                     placeholder="Type your email"
@@ -55,7 +63,7 @@ const Register = () => {
             <div className="form-group">
                 <input
                     value={password}
-                    onChange={handleChange("password")}
+                    onChange={handleChange('password')}
                     type="password"
                     className="form-control"
                     placeholder="Type your password"
