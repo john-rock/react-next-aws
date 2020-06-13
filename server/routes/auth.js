@@ -5,6 +5,6 @@ const router = express.Router();
 const { register } = require('../controllers/auth')
 
 //First arg = endpoint, second arg = function
-router.get('/register', register);
+router.post('/register', register);
 
 module.exports = router;
