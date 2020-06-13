@@ -29,13 +29,14 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.table({ username, email, password });
-        axios.post(`http://localhost:8000/api/register`, {
-            username: username,
-            email,
-            password
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
+        axios
+            .post(`http://localhost:8000/api/register`, {
+                username: username,
+                email,
+                password,
+            })
+            .then((response) => console.log(response))
+            .catch((error) => console.log(error));
     };
 
     const registerForm = () => (
