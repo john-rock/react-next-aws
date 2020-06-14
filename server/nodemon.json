@@ -1,0 +1,6 @@
+{
+    "env": {
+      "EMAIL_FROM": "pcpartzone@gmail.com",
+      "EMAIL_TO": "pcpartzone@gmail.com"
+    }
+  }

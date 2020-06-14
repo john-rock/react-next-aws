@@ -9,7 +9,10 @@ const app = express();
 
 // db
 mongoose
-    .connect(process.env.DATABASE_CLOUD, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(process.env.DATABASE_CLOUD, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then(() => console.log('DB Connected'))
     .catch((err) => console.log(err));
 
