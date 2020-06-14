@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import { showSuccessMessage, showErrorMessage } from '../helpers/alerts';
+import {API} from '../config'
 
 const Register = () => {
     const [state, setState] = useState({
@@ -34,11 +35,14 @@ const Register = () => {
             buttonText: 'Registering',
         });
         try {
-            const response = await axios.post(`http://localhost:8000/api/register`, {
-                username: username,
-                email,
-                password,
-            })
+            const response = await axios.post(
+                `${API}/register`,
+                {
+                    username: username,
+                    email,
+                    password,
+                }
+            );
 
             console.log(response);
             setState({
@@ -48,7 +52,7 @@ const Register = () => {
                 password: '',
                 buttonText: 'Submitted',
                 success: response.data.message,
-        });
+            });
         } catch (error) {
             console.log(error);
             setState({
@@ -102,6 +106,7 @@ const Register = () => {
                     type="text"
                     className="form-control"
                     placeholder="Type your name"
+                    required
                 />
             </div>
 
@@ -112,6 +117,7 @@ const Register = () => {
                     type="email"
                     className="form-control"
                     placeholder="Type your email"
+                    required
                 />
             </div>
 
@@ -122,6 +128,7 @@ const Register = () => {
                     type="password"
                     className="form-control"
                     placeholder="Type your password"
+                    required
                 />
             </div>
 
