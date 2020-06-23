@@ -3,25 +3,34 @@ const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema(
     {
+        userId: {
+            type: String,
+            trim: true,
+            required: true,
+            max: 12,
+            unique: true,
+            index: true, // Allow query based on username
+            loercase: true
+        },
         username: {
             type: String,
             trim: true,
-            require: true,
+            required: true,
             max: 24,
             unique: true,
-            index: true, // Allow query based on username
+            //index: true, // Allow query based on username
         },
         email: {
             type: String,
             trim: true,
-            require: true,
+            required: true,
             unique: true,
             lowercase: true,
         },
         hashed_password: {
             type: String,
             trim: true,
-            require: true,
+            required: true,
         },
         salt: String,
         role: {

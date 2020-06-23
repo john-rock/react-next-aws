@@ -5,9 +5,10 @@ const { userRegisterValidation } = require('../validators/auth');
 const { runValidation } = require('../validators');
 
 // Import from controllers
-const { register } = require('../controllers/auth');
+const { register, registerActivate } = require('../controllers/auth');
 
-//First arg = endpoint, second arg = function
+//First arg = endpoint, second arg = function(controllers)
 router.post('/register', userRegisterValidation, runValidation, register);
+router.post('/register/activate', registerActivate);
 
 module.exports = router;
