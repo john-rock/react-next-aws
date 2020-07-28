@@ -49,7 +49,7 @@ const Login = () => {
 
             //console.log(response); // token / userdata
             authenticate(response, () =>
-                isAuth() && isAuth.role === 'admin'
+                isAuth() && isAuth().role === 'admin'
                     ? Router.push('/admin')
                     : Router.push('/user')
             );

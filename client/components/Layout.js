@@ -1,8 +1,9 @@
-import Head from "next/head";
-import Link from "next/link";
-import Router from "next/router";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
+import Head from 'next/head';
+import Link from 'next/link';
+import Router from 'next/router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import { isAuth, logout } from '../helpers/auth';
 
 // Page load progress bar
 Router.onRouteChangeStart = (url) => NProgress.start();
@@ -29,22 +30,51 @@ const Layout = ({ children }) => {
                     <a className="nav-link text-dark">Home</a>
                 </Link>
             </li>
-            <li className="nav-item">
-                <Link href="/login">
-                    <a className="nav-link text-dark">Login</a>
-                </Link>
-            </li>
-            <li className="nav-item">
-                <Link href="/register">
-                    <a className="nav-link text-dark">Register</a>
-                </Link>
-            </li>
+
+            {!isAuth() && (
+                <>
+                    <li className="nav-item">
+                        <Link href="/login">
+                            <a className="nav-link text-dark">Login</a>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link href="/register">
+                            <a className="nav-link text-dark">Register</a>
+                        </Link>
+                    </li>
+                </>
+            )}
+
+            {isAuth() && isAuth().role === 'admin' && (
+                <li className="nav-item ml-auto">
+                    <Link href="/admin">
+                        <a className="nav-link text-dark">Admin</a>
+                    </Link>
+                </li>
+            )}
+
+            {isAuth() && isAuth().role === 'subscriber' && (
+                <li className="nav-item ml-auto">
+                    <Link href="/user">
+                        <a className="nav-link text-dark">User</a>
+                    </Link>
+                </li>
+            )}
+
+            {isAuth() && (
+                <li className="nav-item">
+                    <a onClick={logout} className="nav-link text-dark">
+                        Logout
+                    </a>
+                </li>
+            )}
         </ul>
     );
 
     return (
         <>
-            {Head()} {nav()}{" "}
+            {Head()} {nav()}{' '}
             <div className="container pt-5 pb-5">{children}</div>
         </>
     );
