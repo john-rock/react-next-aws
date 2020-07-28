@@ -5,7 +5,7 @@ import Router from 'next/router';
 import axios from 'axios';
 import { showSuccessMessage, showErrorMessage } from '../helpers/alerts';
 import { API } from '../config';
-import { authenticate } from '../helpers/auth'
+import { authenticate, isAuth } from '../helpers/auth';
 
 const Login = () => {
     const [state, setState] = useState({
@@ -15,6 +15,11 @@ const Login = () => {
         success: '',
         buttonText: 'Login',
     });
+
+    // Redirect to homepage if logged in
+    useEffect(() => {
+        isAuth() && Router.push('/');
+    }, []);
 
     // Destructure state
     const { email, password, error, success, buttonText } = state;
@@ -43,9 +48,11 @@ const Login = () => {
             });
 
             //console.log(response); // token / userdata
-            authenticate(response, () => {
-                Router.push('/')
-            })
+            authenticate(response, () =>
+                isAuth() && isAuth.role === 'admin'
+                    ? Router.push('/admin')
+                    : Router.push('/user')
+            );
         } catch (error) {
             console.log(error);
             setState({

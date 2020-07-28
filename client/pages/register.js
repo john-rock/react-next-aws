@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import { showSuccessMessage, showErrorMessage } from '../helpers/alerts';
 import {API} from '../config'
+import Router from 'next/router'
+import { isAuth } from '../helpers/auth'
 
 const Register = () => {
     const [state, setState] = useState({
@@ -16,6 +18,10 @@ const Register = () => {
 
     // Destructure state
     const { username, email, password, error, success, buttonText } = state;
+
+    useEffect(() => {
+        isAuth() && Router.push('/')
+    }, []);
 
     const handleChange = (name) => (e) => {
         // Get field that is being updated.
