@@ -41,7 +41,7 @@ const Login = () => {
                 password,
             });
 
-            console.log(response);
+            console.log(response); // token / userdata
         } catch (error) {
             console.log(error);
             setState({
